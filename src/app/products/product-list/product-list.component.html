@@ -48,7 +48,7 @@
               />
             </td>
             <td>
-              <a>
+              <a [routerLink]="['/products', product.id]">
                 {{ product.productName }}
               </a>
             </td>
@@ -57,7 +57,12 @@
             <td>{{ product.price | currency: "USD":"symbol":"1.2-2" }}</td>
             <td></td>
             <td>
-              <button class="btn btn-outline-primary btn-sm">Edit</button>
+              <button
+                [routerLink]="['/products', product.id, 'edit']"
+                class="btn btn-outline-primary btn-sm"
+              >
+                Edit
+              </button>
             </td>
           </tr>
         </tbody>
