@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
 import { Product } from "../product";
 import { ProductService } from "../product.service";
 
@@ -28,13 +29,22 @@ export class ProductListComponent implements OnInit {
   filteredProducts: Product[] = [];
   products: Product[] = [];
 
-  constructor(private productService: ProductService) {}
+  constructor(
+    private productService: ProductService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
+    this.route.queryParamMap.subscribe((qparams) => {
+      this.listFilter = qparams.get("filterBy");
+      this.showImage = Boolean(qparams.get("showImage"));
+    });
     this.productService.getProducts().subscribe({
       next: (products) => {
         this.products = products;
-        this.filteredProducts = this.performFilter(this.listFilter);
+        this.filteredProducts = this.listFilter
+          ? this.performFilter(this.listFilter)
+          : this.products;
       },
       error: (err) => (this.errorMessage = err),
     });
