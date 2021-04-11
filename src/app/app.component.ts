@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
+import { slideInAnimation } from "./app.animation";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.scss"],
+  animations: [slideInAnimation],
 })
 export class AppComponent {
-  title = 'angular-routing';
+  title = "angular-routing";
 }
