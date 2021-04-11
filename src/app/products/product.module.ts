@@ -10,29 +10,37 @@ import { ProductTagComponent } from "./product-edit/product-tag/product-tag.comp
 import { ProductInfoComponent } from "./product-edit/product-info/product-info.component";
 
 const routes: Routes = [
-  { path: "products", component: ProductListComponent },
   {
-    path: "products/:id",
-    component: ProductDetailsComponent,
-    resolve: { resolvedData: ProductResolver },
-  },
-  {
-    path: "products/:id/edit",
-    component: ProductEditComponent,
-    resolve: { resolvedData: ProductResolver },
+    path: "products",
     children: [
       {
         path: "",
-        redirectTo: "info",
-        pathMatch: "full",
+        component: ProductListComponent,
       },
       {
-        path: "info",
-        component: ProductInfoComponent,
+        path: ":id",
+        component: ProductDetailsComponent,
+        resolve: { resolvedData: ProductResolver },
       },
       {
-        path: "tags",
-        component: ProductTagComponent,
+        path: ":id/edit",
+        component: ProductEditComponent,
+        resolve: { resolvedData: ProductResolver },
+        children: [
+          {
+            path: "",
+            redirectTo: "info",
+            pathMatch: "full",
+          },
+          {
+            path: "info",
+            component: ProductInfoComponent,
+          },
+          {
+            path: "tags",
+            component: ProductTagComponent,
+          },
+        ],
       },
     ],
   },
