@@ -7,6 +7,7 @@ import {
   Router,
 } from "@angular/router";
 import { slideInAnimation } from "./app.animation";
+import { MessageService } from "./messages/message.service";
 
 @Component({
   selector: "app-root",
@@ -19,6 +20,10 @@ export class AppComponent {
   pageTitle = "Product Management";
   loading = true;
 
+  get isMessageDisplayed(): boolean {
+    return this.messageService.isDisplayed;
+  }
+
   // get isLoggedIn(): boolean {
   //   return this.authService.isLoggedIn;
   // }
@@ -30,7 +35,7 @@ export class AppComponent {
   //   return "";
   // }
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private messageService: MessageService) {
     router.events.subscribe((routerEvent: any) => {
       this.checkRouterEvent(routerEvent);
     });
@@ -48,6 +53,16 @@ export class AppComponent {
     ) {
       this.loading = false;
     }
+  }
+
+  displayMessages(): void {
+    this.router.navigate([{ outlets: { popup: ["messages"] } }]);
+    this.messageService.isDisplayed = true;
+  }
+
+  hideMessages(): void {
+    this.router.navigate([{ outlets: { popup: null } }]);
+    this.messageService.isDisplayed = false;
   }
 
   logOut(): void {

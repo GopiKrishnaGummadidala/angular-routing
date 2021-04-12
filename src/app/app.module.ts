@@ -9,6 +9,7 @@ import { PageNotFoundComponent } from "./page-not-found/page-not-found.component
 import { HttpClientModule } from "@angular/common/http";
 import { ProductData } from "./products/product-data";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { MessagesModule } from "./messages/messages.module";
 
 @NgModule({
   declarations: [AppComponent, WelcomeComponent, PageNotFoundComponent],
@@ -18,6 +19,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
     HttpClientModule,
     InMemoryWebApiModule.forRoot(ProductData, { delay: 1000 }),
     ProductModule,
+    MessagesModule,
     AppRoutingModule,
   ],
   providers: [],
