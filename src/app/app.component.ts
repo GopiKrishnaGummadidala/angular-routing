@@ -8,6 +8,7 @@ import {
 } from "@angular/router";
 import { slideInAnimation } from "./app.animation";
 import { MessageService } from "./messages/message.service";
+import { AuthService } from "./user/auth.service";
 
 @Component({
   selector: "app-root",
@@ -24,18 +25,22 @@ export class AppComponent {
     return this.messageService.isDisplayed;
   }
 
-  // get isLoggedIn(): boolean {
-  //   return this.authService.isLoggedIn;
-  // }
+  get isLoggedIn(): boolean {
+    return this.authService.isLoggedIn;
+  }
 
-  // get userName(): string {
-  //   if (this.authService.currentUser) {
-  //     return this.authService.currentUser.userName;
-  //   }
-  //   return "";
-  // }
+  get userName(): string {
+    if (this.authService.currentUser) {
+      return this.authService.currentUser.userName;
+    }
+    return "";
+  }
 
-  constructor(private router: Router, private messageService: MessageService) {
+  constructor(
+    private router: Router,
+    private messageService: MessageService,
+    private authService: AuthService
+  ) {
     router.events.subscribe((routerEvent: any) => {
       this.checkRouterEvent(routerEvent);
     });
