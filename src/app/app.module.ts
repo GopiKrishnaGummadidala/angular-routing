@@ -1,3 +1,4 @@
+import { UserModule } from "./user/user.module";
 import { ProductModule } from "./products/product.module";
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
@@ -18,6 +19,7 @@ import { MessagesModule } from "./messages/messages.module";
     BrowserAnimationsModule,
     HttpClientModule,
     InMemoryWebApiModule.forRoot(ProductData, { delay: 1000 }),
+    UserModule,
     ProductModule,
     MessagesModule,
     AppRoutingModule,
