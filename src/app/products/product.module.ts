@@ -1,3 +1,4 @@
+import { ProductEditGuard } from "./product-edit/product-edit.guard";
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
@@ -28,6 +29,7 @@ const routes: Routes = [
         path: ":id/edit",
         component: ProductEditComponent,
         resolve: { resolvedData: ProductResolver },
+        canDeactivate: [ProductEditGuard],
         children: [
           {
             path: "",

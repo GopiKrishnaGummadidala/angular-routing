@@ -113,11 +113,17 @@ export class ProductEditComponent implements OnInit {
     }
   }
 
+  reset(): void {
+    this.dataIsValid = null;
+    this.currentProduct = null;
+    this.originalProduct = null;
+  }
+
   onSaveComplete(message?: string): void {
     if (message) {
       this.messageService.addMessage(message);
     }
-
+    this.reset();
     // Navigate back to the product list
     this.router.navigate(["/products"]);
   }
