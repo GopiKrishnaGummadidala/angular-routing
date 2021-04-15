@@ -9,7 +9,6 @@ import { RouterModule, Routes } from "@angular/router";
 import { ProductResolver } from "./product-resolver.service";
 import { ProductTagComponent } from "./product-edit/product-tag/product-tag.component";
 import { ProductInfoComponent } from "./product-edit/product-info/product-info.component";
-import { AuthGuard } from "../user/auth.guard";
 
 const routes: Routes = [
   {
