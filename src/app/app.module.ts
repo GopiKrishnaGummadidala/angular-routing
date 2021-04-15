@@ -20,7 +20,6 @@ import { MessagesModule } from "./messages/messages.module";
     HttpClientModule,
     InMemoryWebApiModule.forRoot(ProductData, { delay: 1000 }),
     UserModule,
-    ProductModule,
     MessagesModule,
     AppRoutingModule,
   ],
