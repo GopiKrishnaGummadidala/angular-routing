@@ -1,16 +1,18 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { PageNotFoundComponent } from "./page-not-found/page-not-found.component";
-import { ProductListComponent } from "./products/product-list/product-list.component";
 import { AuthGuard } from "./user/auth.guard";
 import { WelcomeComponent } from "./welcome/welcome.component";
 
 const routes: Routes = [
+  { path: "welcome", component: WelcomeComponent },
   {
     path: "products",
-    component: ProductListComponent,
+    canActivate: [AuthGuard],
+    data: { preload: false },
+    loadChildren: () =>
+      import("./products/product.module").then((m) => m.ProductModule),
   },
-  { path: "welcome", component: WelcomeComponent },
   { path: "", redirectTo: "welcome", pathMatch: "full" },
   { path: "**", component: PageNotFoundComponent },
 ];

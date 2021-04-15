@@ -1,5 +1,4 @@
 import { UserModule } from "./user/user.module";
-import { ProductModule } from "./products/product.module";
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { InMemoryWebApiModule } from "angular-in-memory-web-api";

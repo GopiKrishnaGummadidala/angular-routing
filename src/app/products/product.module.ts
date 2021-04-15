@@ -13,38 +13,32 @@ import { AuthGuard } from "../user/auth.guard";
 
 const routes: Routes = [
   {
-    path: "products",
-    canActivate: [AuthGuard],
+    path: "",
+    component: ProductListComponent,
+  },
+  {
+    path: ":id",
+    component: ProductDetailsComponent,
+    resolve: { resolvedData: ProductResolver },
+  },
+  {
+    path: ":id/edit",
+    component: ProductEditComponent,
+    resolve: { resolvedData: ProductResolver },
+    canDeactivate: [ProductEditGuard],
     children: [
       {
         path: "",
-        component: ProductListComponent,
+        redirectTo: "info",
+        pathMatch: "full",
       },
       {
-        path: ":id",
-        component: ProductDetailsComponent,
-        resolve: { resolvedData: ProductResolver },
+        path: "info",
+        component: ProductInfoComponent,
       },
       {
-        path: ":id/edit",
-        component: ProductEditComponent,
-        resolve: { resolvedData: ProductResolver },
-        canDeactivate: [ProductEditGuard],
-        children: [
-          {
-            path: "",
-            redirectTo: "info",
-            pathMatch: "full",
-          },
-          {
-            path: "info",
-            component: ProductInfoComponent,
-          },
-          {
-            path: "tags",
-            component: ProductTagComponent,
-          },
-        ],
+        path: "tags",
+        component: ProductTagComponent,
       },
     ],
   },
