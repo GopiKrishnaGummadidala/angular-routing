@@ -1,6 +1,7 @@
 import { NgModule } from "@angular/core";
-import { Routes, RouterModule, PreloadAllModules } from "@angular/router";
+import { Routes, RouterModule } from "@angular/router";
 import { PageNotFoundComponent } from "./page-not-found/page-not-found.component";
+import { SelectiveStrategy } from "./selective-strategy.service";
 import { AuthGuard } from "./user/auth.guard";
 import { WelcomeComponent } from "./welcome/welcome.component";
 
@@ -8,7 +9,7 @@ const routes: Routes = [
   { path: "welcome", component: WelcomeComponent },
   {
     path: "products",
-    canLoad: [AuthGuard],
+    canActivate: [AuthGuard],
     data: { preload: false },
     loadChildren: () =>
       import("./products/product.module").then((m) => m.ProductModule),
@@ -19,7 +20,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
+    RouterModule.forRoot(routes, { preloadingStrategy: SelectiveStrategy }),
   ],
   exports: [RouterModule],
 })
